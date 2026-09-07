@@ -1036,8 +1036,13 @@
     });
   }
 
-  // --- Interactive Contact Form ---
+  // --- Interactive Contact & Booking System ---
   function setupContactForm() {
+    setupInquiryForm();
+    setupBookingSystem();
+  }
+
+  function setupInquiryForm() {
     const form = document.getElementById('contact-form');
     const statusMsg = document.getElementById('form-status');
     if (!form) return;
@@ -1065,6 +1070,279 @@
         }
       }, 1100);
     });
+  }
+
+  function setupBookingSystem() {
+    // 1. Two-Tab Switcher: Enquire vs Booking
+    const tabEnquire = document.getElementById('tab-btn-enquire');
+    const tabBooking = document.getElementById('tab-btn-booking');
+    const panelEnquire = document.getElementById('panel-enquire');
+    const panelBooking = document.getElementById('panel-booking');
+
+    if (tabEnquire && tabBooking && panelEnquire && panelBooking) {
+      tabEnquire.addEventListener('click', () => {
+        tabEnquire.classList.add('active');
+        tabEnquire.setAttribute('aria-selected', 'true');
+        tabBooking.classList.remove('active');
+        tabBooking.setAttribute('aria-selected', 'false');
+        panelEnquire.classList.add('active');
+        panelBooking.classList.remove('active');
+      });
+
+      tabBooking.addEventListener('click', () => {
+        tabBooking.classList.add('active');
+        tabBooking.setAttribute('aria-selected', 'true');
+        tabEnquire.classList.remove('active');
+        tabEnquire.setAttribute('aria-selected', 'false');
+        panelBooking.classList.add('active');
+        panelEnquire.classList.remove('active');
+        renderCalendar();
+      });
+    }
+
+    // 2. Booking State
+    let calYear = 2026;
+    let calMonth = 8; // September (0-indexed: 8 = Sept)
+    let selectedDate = new Date(2026, 8, 9); // Default Sept 9, 2026
+    let selectedPartOfDay = 'afternoon';
+    let selectedTime = '12:45 PM';
+
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const monthShortNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    const timeSlots = {
+      morning: ['10:00 AM', '10:15 AM', '10:30 AM', '10:45 AM', '11:00 AM', '11:15 AM', '11:30 AM', '11:45 AM'],
+      afternoon: ['12:00 PM', '12:15 PM', '12:30 PM', '12:45 PM', '1:00 PM', '1:15 PM', '1:30 PM', '1:45 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM'],
+      evening: ['4:00 PM', '4:15 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:15 PM', '7:30 PM']
+    };
+
+    function formatDateString(d) {
+      return `${dayNames[d.getDay()]}, ${d.getDate()} ${monthShortNames[d.getMonth()]} · IST`;
+    }
+
+    function formatSummaryString(d, time) {
+      return `${dayNames[d.getDay()]}, ${d.getDate()} ${monthShortNames[d.getMonth()]} · ${time} IST`;
+    }
+
+    // 3. Step Controller
+    function goToStep(step) {
+      document.querySelectorAll('.booking-flow-step').forEach(el => el.classList.remove('active'));
+      const targetStep = document.getElementById(`booking-step-${step}`);
+      if (targetStep) targetStep.classList.add('active');
+
+      // Update Stepper Badges & Lines
+      for (let i = 1; i <= 3; i++) {
+        const ind = document.getElementById(`step-ind-${i}`);
+        const line = document.getElementById(`step-line-${i}`);
+        if (!ind) continue;
+        const numBadge = ind.querySelector('.step-num-badge');
+
+        if (typeof step === 'number' && i < step) {
+          ind.className = 'stepper-step completed';
+          numBadge.innerHTML = '&#10003;'; // Checkmark
+          if (line) line.className = 'stepper-line active';
+        } else if (typeof step === 'number' && i === step) {
+          ind.className = 'stepper-step active';
+          numBadge.innerHTML = i;
+          if (line) line.className = 'stepper-line';
+        } else if (step === 'confirmed') {
+          ind.className = 'stepper-step completed';
+          numBadge.innerHTML = '&#10003;';
+          if (line) line.className = 'stepper-line active';
+        } else {
+          ind.className = 'stepper-step';
+          numBadge.innerHTML = i;
+          if (line) line.className = 'stepper-line';
+        }
+      }
+    }
+
+    // 4. Calendar Generator
+    function renderCalendar() {
+      const titleEl = document.getElementById('cal-month-display');
+      const gridEl = document.getElementById('calendar-days-grid');
+      if (!titleEl || !gridEl) return;
+
+      titleEl.textContent = `${monthNames[calMonth]} ${calYear}`;
+      gridEl.innerHTML = '';
+
+      const firstDayIndex = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      const daysInPrevMonth = new Date(calYear, calMonth, 0).getDate();
+
+      // Trailing days from prev month
+      for (let i = firstDayIndex - 1; i >= 0; i--) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell out-of-month';
+        cell.textContent = daysInPrevMonth - i;
+        gridEl.appendChild(cell);
+      }
+
+      // Current month days
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell';
+        cell.textContent = day;
+
+        // Sept 7, 2026 is Today in simulated calendar
+        if (calYear === 2026 && calMonth === 8 && day === 7) {
+          cell.classList.add('today');
+        }
+
+        // Disable dates before Sept 7, 2026
+        if (calYear === 2026 && calMonth === 8 && day < 7) {
+          cell.classList.add('disabled');
+        } else {
+          // Highlight selected date
+          if (
+            selectedDate &&
+            selectedDate.getFullYear() === calYear &&
+            selectedDate.getMonth() === calMonth &&
+            selectedDate.getDate() === day
+          ) {
+            cell.classList.add('selected');
+          }
+
+          cell.addEventListener('click', () => {
+            selectedDate = new Date(calYear, calMonth, day);
+            renderCalendar();
+
+            // Update Step 2 date display
+            const timeStepDate = document.getElementById('time-step-date-display');
+            if (timeStepDate) timeStepDate.textContent = formatDateString(selectedDate);
+
+            // Update Step 3 summary badge
+            updateSummaryBadge();
+
+            // Advance to Step 2
+            goToStep(2);
+          });
+        }
+
+        gridEl.appendChild(cell);
+      }
+    }
+
+    // Month Navigation Controls
+    const btnPrev = document.getElementById('cal-prev');
+    const btnNext = document.getElementById('cal-next');
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        calMonth--;
+        if (calMonth < 0) {
+          calMonth = 11;
+          calYear--;
+        }
+        renderCalendar();
+      });
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        calMonth++;
+        if (calMonth > 11) {
+          calMonth = 0;
+          calYear++;
+        }
+        renderCalendar();
+      });
+    }
+
+    // 5. Step 2 Time Picker
+    const partOfDaySelect = document.getElementById('booking-part-of-day');
+    const startTimeSelect = document.getElementById('booking-start-time');
+    const btnProceedToStep3 = document.getElementById('btn-proceed-to-step3');
+    const btnBackToStep1 = document.getElementById('btn-back-to-step1');
+
+    function populateTimeSlots(period) {
+      if (!startTimeSelect) return;
+      startTimeSelect.innerHTML = '';
+      const slots = timeSlots[period] || timeSlots.afternoon;
+      slots.forEach((time) => {
+        const opt = document.createElement('option');
+        opt.value = time;
+        opt.textContent = time;
+        if (time === '12:45 PM' || time === slots[0]) opt.selected = true;
+        startTimeSelect.appendChild(opt);
+      });
+    }
+
+    if (partOfDaySelect) {
+      partOfDaySelect.addEventListener('change', (e) => {
+        selectedPartOfDay = e.target.value;
+        populateTimeSlots(selectedPartOfDay);
+      });
+    }
+
+    // Initial slot population
+    populateTimeSlots('afternoon');
+
+    if (btnBackToStep1) {
+      btnBackToStep1.addEventListener('click', () => goToStep(1));
+    }
+
+    function updateSummaryBadge() {
+      const summaryTimeEl = document.getElementById('summary-badge-time');
+      if (summaryTimeEl) {
+        summaryTimeEl.textContent = formatSummaryString(selectedDate, selectedTime);
+      }
+    }
+
+    if (btnProceedToStep3) {
+      btnProceedToStep3.addEventListener('click', () => {
+        if (startTimeSelect) selectedTime = startTimeSelect.value;
+        updateSummaryBadge();
+        goToStep(3);
+      });
+    }
+
+    // 6. Step 3 Details Form & Confirmation
+    const btnBackToStep2 = document.getElementById('btn-back-to-step2');
+    const bookingForm = document.getElementById('booking-form');
+    const btnBookAnother = document.getElementById('btn-book-another');
+
+    if (btnBackToStep2) {
+      btnBackToStep2.addEventListener('click', () => goToStep(2));
+    }
+
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = bookingForm.querySelector('.btn-submit');
+        const origContent = submitBtn.innerHTML;
+
+        submitBtn.innerHTML = '<span>Securing Reservation...</span>';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          submitBtn.innerHTML = origContent;
+          submitBtn.disabled = false;
+
+          const confirmedSlot = document.getElementById('confirmed-slot-display');
+          if (confirmedSlot) {
+            confirmedSlot.textContent = formatSummaryString(selectedDate, selectedTime);
+          }
+
+          goToStep('confirmed');
+          bookingForm.reset();
+        }, 900);
+      });
+    }
+
+    if (btnBookAnother) {
+      btnBookAnother.addEventListener('click', () => {
+        goToStep(1);
+        renderCalendar();
+      });
+    }
+
+    // Initial render
+    renderCalendar();
   }
 
   // --- Navigation & Smooth Scroll ---

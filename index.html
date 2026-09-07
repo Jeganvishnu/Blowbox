@@ -321,47 +321,215 @@
             </div>
           </div>
 
-          <!-- Right: Interactive Conversation Form -->
+          <!-- Right: Interactive Conversation & Booking System -->
           <div class="contact-form-col">
-            <form id="contact-form" autocomplete="off">
-              <div class="form-group-grid">
-                <div class="form-group">
-                  <label for="contact-name">Your Name</label>
-                  <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Morgan" required>
-                </div>
-                <div class="form-group">
-                  <label for="contact-email">Corporate Email</label>
-                  <input type="email" id="contact-email" class="form-input" placeholder="alex@company.com" required>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="contact-service">Primary Focus Area</label>
-                <select id="contact-service" class="form-select">
-                  <option value="custom-software">Custom Software & Microservices</option>
-                  <option value="web-apps">High-Performance Web Applications</option>
-                  <option value="mobile-apps">Native / Cross-Platform Mobile Apps</option>
-                  <option value="cloud-devops">Cloud Infrastructure & Modernization</option>
-                  <option value="ai-automation">AI Integration & Intelligent Automation</option>
-                  <option value="ui-ux">UI/UX & Immersive 3D Systems</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="contact-message">Project Vision or Problem Statement</label>
-                <textarea id="contact-message" class="form-textarea" placeholder="Describe what you want to build, timelines, or specific technical goals..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn-submit">
-                <span>Start a Conversation</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
+            <!-- Two-Column Tab Switcher: "Enquire" vs "Booking" -->
+            <div class="contact-tab-switcher" role="tablist" aria-label="Contact Options">
+              <button type="button" class="tab-switch-btn active" id="tab-btn-enquire" role="tab" aria-selected="true" data-tab="enquire">
+                <span>Enquire</span>
               </button>
+              <button type="button" class="tab-switch-btn" id="tab-btn-booking" role="tab" aria-selected="false" data-tab="booking">
+                <span>Book a Call</span>
+              </button>
+            </div>
 
-              <div class="form-status" id="form-status"></div>
-            </form>
+            <!-- TAB PANEL 1: ENQUIRE (Start a Conversation) -->
+            <div id="panel-enquire" class="contact-tab-panel active" role="tabpanel" aria-labelledby="tab-btn-enquire">
+              <form id="contact-form" autocomplete="off">
+                <div class="form-group-grid">
+                  <div class="form-group">
+                    <label for="contact-name">Your Name</label>
+                    <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Morgan" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-email">Corporate Email</label>
+                    <input type="email" id="contact-email" class="form-input" placeholder="alex@company.com" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-service">Primary Focus Area</label>
+                  <select id="contact-service" class="form-select">
+                    <option value="custom-software">Custom Software & Microservices</option>
+                    <option value="web-apps">High-Performance Web Applications</option>
+                    <option value="mobile-apps">Native / Cross-Platform Mobile Apps</option>
+                    <option value="cloud-devops">Cloud Infrastructure & Modernization</option>
+                    <option value="ai-automation">AI Integration & Intelligent Automation</option>
+                    <option value="ui-ux">UI/UX & Immersive 3D Systems</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-message">Project Vision or Problem Statement</label>
+                  <textarea id="contact-message" class="form-textarea" placeholder="Describe what you want to build, timelines, or specific technical goals..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                  <span>Start a Conversation</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+
+                <div class="form-status" id="form-status"></div>
+              </form>
+            </div>
+
+            <!-- TAB PANEL 2: BOOKING (3-Step Scheduler matching reference images) -->
+            <div id="panel-booking" class="contact-tab-panel" role="tabpanel" aria-labelledby="tab-btn-booking">
+              <!-- Stepper Progress Header -->
+              <div class="booking-stepper">
+                <div class="stepper-step active" id="step-ind-1">
+                  <span class="step-num-badge">1</span>
+                  <span class="step-label-text">Date</span>
+                </div>
+                <div class="stepper-line" id="step-line-1"></div>
+                <div class="stepper-step" id="step-ind-2">
+                  <span class="step-num-badge">2</span>
+                  <span class="step-label-text">Time</span>
+                </div>
+                <div class="stepper-line" id="step-line-2"></div>
+                <div class="stepper-step" id="step-ind-3">
+                  <span class="step-num-badge">3</span>
+                  <span class="step-label-text">Details</span>
+                </div>
+              </div>
+
+              <!-- STEP 1: DATE CALENDAR (Matching Reference Image 2) -->
+              <div id="booking-step-1" class="booking-flow-step active">
+                <div class="booking-step-header">
+                  <h3 class="booking-heading">Book a Free 15-min Call</h3>
+                  <p class="booking-subheading">Pick a date — calls run 10:00 AM – 7:30 PM IST, all days</p>
+                </div>
+
+                <div class="calendar-card">
+                  <div class="calendar-header">
+                    <button type="button" class="cal-nav-btn" id="cal-prev" aria-label="Previous month">&lt;</button>
+                    <span class="cal-month-title" id="cal-month-display">September 2026</span>
+                    <button type="button" class="cal-nav-btn" id="cal-next" aria-label="Next month">&gt;</button>
+                  </div>
+                  <div class="calendar-weekdays">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                  </div>
+                  <div class="calendar-days-grid" id="calendar-days-grid">
+                    <!-- Populated dynamically via app.js -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 2: TIME PICKER (Matching Reference Images 3 & 4) -->
+              <div id="booking-step-2" class="booking-flow-step">
+                <button type="button" class="booking-back-btn" id="btn-back-to-step1">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                  <span>Back</span>
+                </button>
+
+                <div class="booking-step-header">
+                  <h3 class="booking-heading">Choose a time</h3>
+                  <p class="booking-subheading" id="time-step-date-display">Wed, 9 Sept · IST</p>
+                </div>
+
+                <div class="form-group">
+                  <label for="booking-part-of-day">Part of day</label>
+                  <select id="booking-part-of-day" class="form-select">
+                    <option value="morning">🌅 Morning (10:00 AM – 11:45 AM IST)</option>
+                    <option value="afternoon" selected>☀️ Afternoon (12:00 PM – 3:45 PM IST)</option>
+                    <option value="evening">🌆 Evening (4:00 PM – 7:30 PM IST)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="booking-start-time">Start time</label>
+                  <select id="booking-start-time" class="form-select">
+                    <!-- Populated dynamically via app.js -->
+                  </select>
+                </div>
+
+                <button type="button" class="btn-submit" id="btn-proceed-to-step3">
+                  <span>Continue to Details</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+
+              <!-- STEP 3: DETAILS FORM (Matching Reference Image 5) -->
+              <div id="booking-step-3" class="booking-flow-step">
+                <button type="button" class="booking-back-btn" id="btn-back-to-step2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                  <span>Back</span>
+                </button>
+
+                <div class="booking-step-header">
+                  <h3 class="booking-heading">Confirm Your Consultation</h3>
+                  <p class="booking-subheading">Share your details. Our senior solutions architects will join this 1-on-1 strategy call directly.</p>
+                </div>
+
+                <!-- Schedule Summary Badge -->
+                <div class="booking-summary-badge">
+                  <div class="badge-accent-bar"></div>
+                  <div class="badge-content">
+                    <div class="badge-slot-time" id="summary-badge-time">Wed, 9 Sept · 12:45 PM IST</div>
+                    <div class="badge-slot-type">15-min free technical consultation call</div>
+                  </div>
+                </div>
+
+                <form id="booking-form" autocomplete="off">
+                  <div class="form-group">
+                    <label for="booking-name">Name <span class="required-star">*</span></label>
+                    <input type="text" id="booking-name" class="form-input" placeholder="Enter your full name" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="booking-phone">Phone Number (WhatsApp) <span class="required-star">*</span></label>
+                    <input type="tel" id="booking-phone" class="form-input" placeholder="+91 9876543210" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="booking-email">Email ID <span class="required-star">*</span></label>
+                    <input type="email" id="booking-email" class="form-input" placeholder="you@company.com" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="booking-scope">Which best describes your technical goals? <span class="required-star">*</span></label>
+                    <select id="booking-scope" class="form-select" required>
+                      <option value="" disabled selected>Select an option</option>
+                      <option value="new-platform">Architecting a New Web / Mobile Product</option>
+                      <option value="enterprise-software">Enterprise Software Modernization & APIs</option>
+                      <option value="ai-automation">AI Integration & Intelligent Automation</option>
+                      <option value="cloud-devops">Cloud Infrastructure, Security & Scale</option>
+                      <option value="general-consulting">General Technical Advisory / Architecture Audit</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn-submit">
+                    <span>Book Appointment</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+
+                  <div class="booking-footnote">
+                    <p>*Our senior technology team leads all sessions directly.</p>
+                    <p>You'll receive a calendar invitation and WhatsApp reminder immediately after booking.</p>
+                  </div>
+                </form>
+              </div>
+
+              <!-- CONFIRMATION SCREEN -->
+              <div id="booking-step-confirmed" class="booking-flow-step">
+                <div class="confirmed-card">
+                  <div class="confirmed-check-icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  </div>
+                  <h3 class="booking-heading">Appointment Confirmed!</h3>
+                  <p class="confirmed-time-text" id="confirmed-slot-display">Wed, 9 Sept · 12:45 PM IST</p>
+                  <p class="confirmed-desc">A Google Meet link and calendar invitation have been sent to your email.</p>
+                  <button type="button" class="btn-secondary" id="btn-book-another">
+                    <span>Schedule Another Call</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
