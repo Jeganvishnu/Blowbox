@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170" fill="none">
+  <defs>
+    <linearGradient id="bbi-blue" x1="20" y1="20" x2="150" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0066ff"/>
+      <stop offset="50%" stop-color="#00a2ff"/>
+      <stop offset="100%" stop-color="#00e5ff"/>
+    </linearGradient>
+    <linearGradient id="bbi-gold" x1="20" y1="20" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffe680"/>
+      <stop offset="40%" stop-color="#f59e0b"/>
+      <stop offset="90%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="bbi-cube-top" x1="30" y1="20" x2="80" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffec99"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="bbi-cube-side" x1="40" y1="50" x2="80" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0088ff"/>
+      <stop offset="100%" stop-color="#002d80"/>
+    </linearGradient>
+    <filter id="bbi-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <g transform="translate(10, 10)">
+    <!-- Gold Inner Bevel -->
+    <path d="M 28 12 L 68 12 C 88 12, 104 22, 104 40 C 104 53, 96 63, 82 67 C 102 71, 114 84, 114 102 C 114 122, 94 134, 68 134 L 28 134 Z" fill="url(#bbi-gold)" />
+
+    <!-- Outer Blue Ribbon of B -->
+    <path d="M 24 8 L 70 8 C 92 8, 108 20, 108 38 C 108 50, 98 60, 84 64 C 104 68, 118 82, 118 102 C 118 124, 98 138, 70 138 L 24 138 L 24 8 Z 
+             M 40 24 L 40 56 L 66 56 C 76 56, 86 50, 86 40 C 86 30, 76 24, 66 24 Z 
+             M 40 72 L 40 120 L 70 120 C 82 120, 94 112, 94 96 C 94 80, 82 72, 70 72 Z" fill="url(#bbi-blue)" />
+
+    <!-- Central Isometric 3D Code Box -->
+    <g transform="translate(36, 42) scale(0.68)">
+      <polygon points="40,0 75,18 40,36 5,18" fill="url(#bbi-cube-top)" />
+      <polygon points="5,18 40,36 40,75 5,57" fill="#0044aa" />
+      <polygon points="40,36 75,18 75,57 40,75" fill="url(#bbi-cube-side)" />
+      <g transform="translate(44, 40) skewY(-14) scale(0.75)" filter="url(#bbi-glow)">
+        <path d="M 8 16 L 2 10 L 8 4" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        <line x1="12" y1="18" x2="16" y2="2" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" />
+        <path d="M 20 4 L 26 10 L 20 16" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </g>
+    </g>
+
+    <!-- Orbiting Voxels -->
+    <rect x="114" y="16" width="13" height="13" rx="2" fill="#00a6ff" />
+    <rect x="130" y="2" width="14" height="14" rx="2" fill="#0088ff" />
+    <rect x="122" y="34" width="12" height="12" rx="2" fill="#f59e0b" />
+    <rect x="138" y="26" width="11" height="11" rx="2" fill="#ffd166" />
+    <rect x="140" y="46" width="10" height="10" rx="2" fill="#00e5ff" />
+    <rect x="128" y="58" width="9" height="9" rx="2" fill="#f59e0b" />
+  </g>
+</svg>

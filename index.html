@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Blow Box — Technology that moves business forward</title>
+  <meta name="description" content="Blow Box builds modern, intelligent digital technology solutions. Premium web engineering, custom software, cloud architectures, and AI systems.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit & Alex Brush (Script Accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="intro-mode">
+
+  <!-- Ambient Showroom Lighting & Space -->
+  <div class="ambient-lighting" aria-hidden="true">
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+    <div class="ambient-light light-3"></div>
+    <div class="ambient-grid"></div>
+  </div>
+
+  <!-- Pinned WebGL 3D Viewport Canvas -->
+  <canvas id="webgl-canvas" aria-label="3D Interactive Blow Box Emblem"></canvas>
+
+  <!-- CINEMATIC INTRO PORTAL ("CLICK TO ENTER") -->
+  <div id="intro-portal" class="intro-portal">
+    <!-- Top Cue -->
+    <div class="intro-top-cue">CLICK THE B LOGO TO ENTER</div>
+
+    <!-- Left Flanking Annotations -->
+    <div class="intro-side-col intro-side-left">
+      <span class="side-word">IDEAS</span>
+      <span class="side-word">TECHNOLOGY</span>
+      <span class="side-word">IMPACT</span>
+      <span class="side-word accent">A BRIGHTER TOMORROW</span>
+    </div>
+
+    <!-- Right Flanking Annotations -->
+    <div class="intro-side-col intro-side-right">
+      <span class="side-word">INNOVATE</span>
+      <span class="side-word">DEVELOP</span>
+      <span class="side-word">AUTOMATE</span>
+      <span class="side-word">SCALE</span>
+      <span class="side-script">More Than Software</span>
+    </div>
+
+    <!-- Center Brand Lockup & Enter Button -->
+    <div class="intro-center-lockup">
+      <h1 class="intro-brand-title">
+        <span class="letter">B</span><span class="letter">L</span><span class="letter">O</span><span class="letter">W</span>
+        <span class="intro-diamond">◆</span>
+        <span class="letter">B</span><span class="letter">O</span><span class="letter">X</span>
+      </h1>
+      <div class="intro-subtitle">SOFTWARE SOLUTIONS</div>
+      <div class="intro-tagline">• TURNING IDEAS INTO DIGITAL REALITY</div>
+      
+      <button id="btn-enter" class="btn-click-enter" aria-label="Enter Blow Box Experience">
+        <span>CLICK TO ENTER &rarr;</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Minimal Floating Dynamic Scroll Header -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <!-- Left: Blow Box Brand Logo -->
+      <a href="#hero" class="header-brand" aria-label="Blow Box Home">
+        <div class="brand-icon-wrap">
+          <img src="assets/logo-icon.svg" alt="Blow Box 3D Emblem" width="36" height="36">
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">
+            <span class="part-blow">BLOW</span><span class="part-box">BOX</span>
+          </span>
+          <span class="brand-tag">Software Solutions</span>
+        </div>
+      </a>
+
+      <!-- Center: Navigation Pill -->
+      <nav class="nav-pill" aria-label="Primary Navigation">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Right: Direct CTA -->
+      <div class="header-actions">
+        <a href="#contact" class="btn-header-cta">
+          <span>Get Started</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Scroll Story Content -->
+  <main class="content-wrapper">
+
+    <!-- 1. HERO SECTION: 3D LOGO CENTERPIECE -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-interactive-content">
+        <!-- Small Brand Label -->
+        <div class="brand-pill-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">Blow Box <span class="badge-gold">•</span> Engineering Velocity</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="hero-title">
+          Technology that moves <br>
+          <span class="gradient-text">business forward.</span>
+        </h1>
+
+        <!-- Supporting Text -->
+        <p class="hero-subtitle">
+          We architect, build, and scale mission-critical digital systems. From enterprise cloud platforms to cutting-edge 3D applications, Blow Box turns ambitious visions into high-yield technological reality.
+        </p>
+
+        <!-- Primary & Secondary CTAs -->
+        <div class="hero-cta-group">
+          <a href="#contact" class="btn-primary">
+            <span>Let’s Build</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="#services" class="btn-secondary">
+            <span>Explore Services</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spatial Spacer for the 3D Floating Emblem -->
+      <div class="hero-3d-spacer" aria-hidden="true"></div>
+
+      <!-- Scroll Story Cue -->
+      <div class="scroll-cue" onclick="document.querySelector('#services').scrollIntoView({ behavior: 'smooth' })">
+        <span class="scroll-cue-text">Scroll to Explore</span>
+        <div class="scroll-cue-icon">
+          <div class="scroll-cue-dot"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 3. SERVICES SECTION: 3D INTERACTIVE CARDS -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span>Capabilities & Solutions</span>
+          </div>
+          <h2 class="section-title">
+            Engineered for scale. <br>
+            Crafted with precision.
+          </h2>
+          <p class="section-subtitle">
+            Comprehensive digital technology solutions designed to empower modern enterprises with speed, security, and intelligence.
+          </p>
+        </div>
+
+        <!-- 3D Interactive Service Cards Grid -->
+        <div class="services-grid" id="services-grid">
+          <!-- Populated dynamically by app.js with 3D tilt & cursor tracking -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 4. ABOUT BLOW BOX: SPLIT-SCREEN 3D SHOWCASE -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-split-container">
+          <!-- Left Column: Typography & Company Story -->
+          <div class="about-content">
+            <div class="section-eyebrow">
+              <span>About Blow Box</span>
+            </div>
+            <h2 class="about-title">
+              We build technology with purpose.
+            </h2>
+            <p class="about-lead">
+              At Blow Box, we believe high-performance software is born at the intersection of architectural discipline and artistic ingenuity.
+            </p>
+            <p class="about-narrative">
+              Founded on the belief that digital technology should solve real-world complexities effortlessly, our distributed engineering teams partner with high-growth companies and global enterprises. We eliminate friction, modernize legacy infrastructure, and deliver resilient software assets that drive sustained market leadership.
+            </p>
+
+            <!-- Metrics Grid -->
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-val">99.9%</div>
+                <div class="metric-label">System Architecture Uptime</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val">150+</div>
+                <div class="metric-label">Digital Products Engineered</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val">40+</div>
+                <div class="metric-label">Global Enterprise Partners</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val">&lt;200ms</div>
+                <div class="metric-label">Global Edge Response Latency</div>
+              </div>
+            </div>
+
+            <!-- Value Pillars -->
+            <div class="values-pills">
+              <div class="val-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span>Disciplined Architecture</span>
+              </div>
+              <div class="val-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <span>Rapid Velocity</span>
+              </div>
+              <div class="val-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>Zero-Compromise Security</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: 3D Emblem Showcase Spatial Viewport -->
+          <div class="about-3d-stage">
+            <div class="stage-overlay-badge">
+              <span class="overlay-dot"></span>
+              <span class="overlay-text">Blow Box Spatial Core • Real-time WebGL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. FINAL CTA & CONTACT: CINEMATIC LOGO REASSEMBLY -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <!-- Reassembly Indicator -->
+        <div class="reassembly-indicator">
+          <div class="reassembly-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+            <span>Story Full Circle • Emblem Reassembled</span>
+          </div>
+        </div>
+
+        <div class="contact-hero-wrap">
+          <h2 class="contact-headline">
+            Let’s build <span>what’s next.</span>
+          </h2>
+          <p class="contact-subtext">
+            Have an idea, challenge, or project? Let’s turn it into something meaningful. Reach out to collaborate directly with our senior technology team.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Left: Direct Details -->
+          <div class="contact-info-col">
+            <div class="info-card">
+              <div class="info-header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <h4>Direct Inquiries</h4>
+              </div>
+              <p>For project scoping and architecture consulting:</p>
+              <p><a href="mailto:hello@blowbox.tech">hello@blowbox.tech</a></p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <h4>Turnaround SLA</h4>
+              </div>
+              <p>All enterprise RFPs and inquiries receive an engineering evaluation within 24 business hours.</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <h4>Global Presence</h4>
+              </div>
+              <p>Engineering headquarters with distributed nodes across North America, Europe, and Asia-Pacific.</p>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Conversation Form -->
+          <div class="contact-form-col">
+            <form id="contact-form" autocomplete="off">
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label for="contact-name">Your Name</label>
+                  <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Morgan" required>
+                </div>
+                <div class="form-group">
+                  <label for="contact-email">Corporate Email</label>
+                  <input type="email" id="contact-email" class="form-input" placeholder="alex@company.com" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-service">Primary Focus Area</label>
+                <select id="contact-service" class="form-select">
+                  <option value="custom-software">Custom Software & Microservices</option>
+                  <option value="web-apps">High-Performance Web Applications</option>
+                  <option value="mobile-apps">Native / Cross-Platform Mobile Apps</option>
+                  <option value="cloud-devops">Cloud Infrastructure & Modernization</option>
+                  <option value="ai-automation">AI Integration & Intelligent Automation</option>
+                  <option value="ui-ux">UI/UX & Immersive 3D Systems</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message">Project Vision or Problem Statement</label>
+                <textarea id="contact-message" class="form-textarea" placeholder="Describe what you want to build, timelines, or specific technical goals..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit">
+                <span>Start a Conversation</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+
+              <div class="form-status" id="form-status"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Service Details Modal Drawer -->
+  <div class="modal-backdrop" id="service-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-service-title">
+    <div class="service-modal">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon-wrap" id="modal-icon-container"></div>
+        <h3 class="modal-title" id="modal-service-title">Service Details</h3>
+      </div>
+
+      <p class="modal-desc" id="modal-service-desc"></p>
+
+      <div class="modal-section-title">Core Technology Stack</div>
+      <div class="tech-badges-wrap" id="modal-tech-stacks"></div>
+
+      <div class="modal-section-title">Key Engineering Deliverables</div>
+      <div class="process-steps-list" id="modal-deliverables"></div>
+    </div>
+  </div>
+
+  <!-- Minimal Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-copy">
+        &copy; 2026 Blow Box Software Solutions. All rights reserved.
+      </div>
+      <nav class="footer-nav" aria-label="Footer Links">
+        <a href="#hero" class="footer-link">Back to Top</a>
+        <a href="#services" class="footer-link">Services</a>
+        <a href="#about" class="footer-link">About</a>
+        <a href="#contact" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Three.js (Locally Bundled for Zero-Failure Speed) -->
+  <script src="assets/three.min.js"></script>
+  <!-- Application & 3D Story Engine -->
+  <script src="app.js"></script>
+
+</body>
+</html>
